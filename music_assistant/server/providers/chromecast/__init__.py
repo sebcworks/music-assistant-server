@@ -525,7 +525,8 @@ class ChromecastProvider(PlayerProvider):
         if castplayer.cc.app_id == app_id:
             return  # already active
 
-        def launched_callback(success: bool, response: dict[str, Any] | None) -> None:
+        # def launched_callback(success: bool, response: dict[str, Any] | None) -> None: # pychromecast 14  # noqa: E501
+        def launched_callback() -> None:
             self.mass.loop.call_soon_threadsafe(event.set)
 
         def launch() -> None:

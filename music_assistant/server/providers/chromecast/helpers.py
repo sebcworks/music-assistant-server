@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import urllib.error
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from typing import TYPE_CHECKING, Self
 from uuid import UUID
 
@@ -52,11 +52,13 @@ class ChromecastInfo:
     @classmethod
     def from_cast_info(cls: Self, cast_info: CastInfo) -> Self:
         """Instantiate ChromecastInfo from CastInfo."""
-        return cls(**asdict(cast_info))
+        # return cls(**asdict(cast_info)) # pychromecast 14
+        return cls(**cast_info._asdict())  # pychromecast 13
 
     def update(self, cast_info: CastInfo) -> None:
         """Update ChromecastInfo from CastInfo."""
-        for key, value in asdict(cast_info).items():
+        # for key, value in asdict(cast_info).items(): # pychromecast 14
+        for key, value in cast_info._asdict().items():
             if not value:
                 continue
             setattr(self, key, value)
