@@ -14,41 +14,31 @@ import cchardet
 import xmltodict
 
 from music_assistant.common.helpers.util import parse_title_and_version
-from music_assistant.common.models.config_entries import (
-    ConfigEntry,
-    ConfigEntryType,
-    ConfigValueOption,
-)
-from music_assistant.common.models.enums import ExternalID, ProviderFeature, StreamType
-from music_assistant.common.models.errors import MediaNotFoundError, MusicAssistantError
-from music_assistant.common.models.media_items import (
-    Album,
-    Artist,
-    AudioFormat,
-    BrowseFolder,
-    ContentType,
-    ImageType,
-    ItemMapping,
-    MediaItemImage,
-    MediaItemType,
-    MediaType,
-    PagedItems,
-    Playlist,
-    ProviderMapping,
-    SearchResults,
-    Track,
-)
+from music_assistant.common.models.config_entries import (ConfigEntry,
+                                                          ConfigEntryType,
+                                                          ConfigValueOption)
+from music_assistant.common.models.enums import (ExternalID, ProviderFeature,
+                                                 StreamType)
+from music_assistant.common.models.errors import (MediaNotFoundError,
+                                                  MusicAssistantError)
+from music_assistant.common.models.media_items import (Album, Artist,
+                                                       AudioFormat,
+                                                       BrowseFolder,
+                                                       ContentType, ImageType,
+                                                       ItemMapping,
+                                                       MediaItemImage,
+                                                       MediaItemType,
+                                                       MediaType, PagedItems,
+                                                       Playlist,
+                                                       ProviderMapping,
+                                                       SearchResults, Track)
 from music_assistant.common.models.streamdetails import StreamDetails
-from music_assistant.constants import (
-    DB_TABLE_ALBUM_ARTISTS,
-    DB_TABLE_ALBUM_TRACKS,
-    DB_TABLE_ALBUMS,
-    DB_TABLE_ARTISTS,
-    DB_TABLE_PLAYLOG,
-    DB_TABLE_PROVIDER_MAPPINGS,
-    DB_TABLE_TRACK_ARTISTS,
-    VARIOUS_ARTISTS_NAME,
-)
+from music_assistant.constants import (DB_TABLE_ALBUM_ARTISTS,
+                                       DB_TABLE_ALBUM_TRACKS, DB_TABLE_ALBUMS,
+                                       DB_TABLE_ARTISTS, DB_TABLE_PLAYLOG,
+                                       DB_TABLE_PROVIDER_MAPPINGS,
+                                       DB_TABLE_TRACK_ARTISTS,
+                                       VARIOUS_ARTISTS_NAME)
 from music_assistant.server.controllers.cache import use_cache
 from music_assistant.server.controllers.music import DB_SCHEMA_VERSION
 from music_assistant.server.helpers.compare import compare_strings
@@ -304,6 +294,7 @@ class FileSystemProviderBase(MusicProvider):
                 continue
 
             if index < offset:
+                index += 1
                 continue
 
             if item.is_dir:
